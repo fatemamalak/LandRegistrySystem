@@ -16,16 +16,18 @@ concept Address {
   o String street optional
   o String zip optional
 }
-asset Land identified by Plot_Number {
+asset Property identified by Property_id {
    o	Address Address
-   o 	String Plot_Number
+   o 	String Property_id
+   o 	String Property_type 
    o 	String Area
    o 	String North
    o 	String East
    o 	String  West
    o 	String  South
    o 	String  Freehold
-   o    String OwnerShipStatus
+   o    OwnerShipStatus status
+   -->  Owner owner
 }
 
 participant Buyer identified by buyer_adhar_id{
@@ -36,6 +38,16 @@ participant Buyer identified by buyer_adhar_id{
  o String Mother_Name
  o String dob
  --> Seller owner
+ --> Witness witness_1
+ --> Witness witness_2
+}
+participant Owner identified by owner_adhar_id{
+ o String Name
+ o String owner_adhar_id
+ o String PAN
+ o String Father_Name
+ o String Mother_Name
+
 }
 participant Seller identified by seller_adhar_id{
  o String Name
@@ -44,11 +56,15 @@ participant Seller identified by seller_adhar_id{
  o String Father_Name
  o String Mother_Name
  o String dob
+ --> Witness witness_1
+ --> Witness witness_2
 }
 participant Witness identified by witness_adhar_id{
  o String Name
  o String witness_adhar_id
 }
-transaction Ownership_transfer {
-  
+
+transaction Add_property {
+  --> Property property
+  --> Owner newOwner
 }
