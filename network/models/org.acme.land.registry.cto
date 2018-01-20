@@ -1,0 +1,54 @@
+/**
+ * New model file
+ */
+
+namespace org.acme.land.registry
+/**
+ * The type of perishable product being shipped
+ */
+enum OwnerShipStatus {
+  o Owned
+  o IN_TRANSIT
+}
+concept Address {
+  o String city optional
+  o String country
+  o String street optional
+  o String zip optional
+}
+asset Land identified by Plot_Number {
+   o	Address Address
+   o 	String Plot_Number
+   o 	String Area
+   o 	String North
+   o 	String East
+   o 	String  West
+   o 	String  South
+   o 	String  Freehold
+   o    String OwnerShipStatus
+}
+
+participant Buyer identified by buyer_adhar_id{
+ o String Name
+ o String buyer_adhar_id
+ o String PAN
+ o String Father_Name
+ o String Mother_Name
+ o String dob
+ --> Seller owner
+}
+participant Seller identified by seller_adhar_id{
+ o String Name
+ o String seller_adhar_id
+ o String PAN
+ o String Father_Name
+ o String Mother_Name
+ o String dob
+}
+participant Witness identified by witness_adhar_id{
+ o String Name
+ o String witness_adhar_id
+}
+transaction Ownership_transfer {
+  
+}
