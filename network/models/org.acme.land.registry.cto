@@ -8,7 +8,7 @@ namespace org.acme.land.registry
  */
 enum OwnerShipStatus {
   o Owned
-  o IN_TRANSIT
+  o doc_7_12_pending
 }
 concept Address {
   o String city optional
@@ -25,7 +25,7 @@ asset Property identified by Property_id {
    o 	String East
    o 	String  West
    o 	String  South
-   o 	String  Freehold
+   o	Boolean Mortgage
    o    OwnerShipStatus status
    -->  Owner owner
 }
@@ -64,7 +64,23 @@ participant Witness identified by witness_adhar_id{
  o String witness_adhar_id
 }
 
-transaction Add_property {
+transaction add_property {
   --> Property property
   --> Owner newOwner
+}
+
+transaction ownership_transfer{
+ -->Owner newOwner
+ -->Seller Owner
+ -->Property property
+ o String owner
+ o String seller
+ o String owner_adhar_id
+}
+transaction revert_ownership{
+	--> Owner newOwner
+	--> Property property
+} 
+transaction ownership_complete{
+	--> Property property
 }
