@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+
+
+                var dataP = {
+                    "$class": "org.acme.Z2BTestNetwork.Buyer",
+                    "buyerID": $('#bname').val(),
+                    "companyName": "string"
+                }
+
+
+                $.post("http://23.97.71.86:3000/api/org.acme.Z2BTestNetwork.Buyer",
+                    dataP,
+                    function (data, status) {
+                        alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                    });
+            });
+        });
+    </script>
+
+
+
+</head>
+<body>
+
+    <div align="center" id="ownerContainer">
+        <h3> Property Details </h3>
+
+        Address :
+        <input type="text" id="=address" />
+        <br/
+
+        Property Id :
+        <input type="text" id="" />
+        <br />
+
+        Property Type :
+        <input type="text" id="" />
+        <br />
+
+        Area :
+        <input type="text" id="" />
+        <br />
+
+        North :
+        <input type="text" id="" />
+        <br />
+
+        South :
+        <input type="text" id="" />
+        <br />
+
+        East :
+        <input type="text" id="" />
+        <br />
+
+
+        West :
+        <input type="text" id="" />
+        <br />
+
+
+
+
+        <h3> Owner Details </h3>
+
+        Name :
+        <input align="center" type="text" id="ownerID" />
+        <br />
+        Aadhar :
+        <input type="text" id="buyer_adhar_id" />
+        <br />
+        PAN Card Number :
+        <input type="text" id="pan" />
+        <br />
+        Father Name :
+        <input type="text" id="father_name" />
+        <br />
+        Mother Name :
+        <input type="text" id="mother_name" />
+        <br />
+        <button id="submitData">Submit </button>
+
+
+    </div>
+
+
+
+</body>
+</html>
