@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+
+                var dataOwner = {
+                    "$class": "org.acme.land.registry.Owner",
+                    "Name": $('#Name').val(),
+                    "owner_adhar_id": $('#owner_adhar_id').val(),
+                    "PAN": $('#PAN').val(),
+                    "Father_Name": $('#Father_name').val(),
+                    "Mother_Name": $('#Mother_name').val()
+                }
+                console.log(dataOwner);
+                var dataProperty = {
+                    "$class": "org.acme.land.registry.Property",
+                    "Address": {
+                        "$class": "org.acme.land.registry.Address",
+                        "city": $('#city').val(),
+                        "country": $('#country').val(),
+                        "street": $('#street').val(),
+                        "zip": $('#zip').val()
+                    },
+                    "Property_id": $('#Property_id').val(),
+                    "Property_type": $('#Property_type').val(),
+                    "Area": $('#Area').val(),
+                    "North": $('#North').val(),
+                    "East": $('#East').val(),
+                    "West": $('#West').val(),
+                    "South": $('#South').val(),
+                    "status": "Owned",
+                    "owner": "org.acme.land.registry.Owner#" + $('#owner_adhar_id').val(),
+                    "Mortgage": JSON.parse( $('#Mortgage').val() )
+                }
+
+                console.log( JSON.stringify( dataProperty));
+
+
+                $.post("http://40.83.126.91:3000/api/org.acme.land.registry.Owner",
+                    dataOwner,
+                    function (data, status) {
+                        console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                    });
+
+
+                $.post("http://40.83.126.91:3000/api/org.acme.land.registry.Property",
+                            dataProperty,
+                            function (data, status) {
+                                alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                            });
+            });
+        });
+
+
+    </script>
+
+
+
+</head>
+<body>
+
+    <div align="center" id="ownerContainer">
+        <h3> Property Details </h3>
+
+        city :
+        <input type="text" id="city" />
+        <br />
+
+        country :
+        <input type="text" id="country" />
+        <br />
+
+        street:
+        <input type="text" id="street" />
+        <br />
+
+        zip:
+        <input type="text" id="zip" />
+        <br />
+
+        Property_id :
+        <input type="text" id="Property_id" />
+        <br />
+
+        Mortgage:
+        <input type="text" id="Mortgage" />
+        <br />
+
+
+        Property_type :
+        <input type="text" id="Property_type" />
+        <br />
+
+        Area :
+        <input type="text" id="Area" />
+        <br />
+
+        North :
+        <input type="text" id="North" />
+        <br />
+
+        South :
+        <input type="text" id="South" />
+        <br />
+
+        East :
+        <input type="text" id="East" />
+        <br />
+
+
+        West :
+        <input type="text" id="West" />
+        <br />
+
+
+        <h3> Owner Details </h3>
+
+        Name :
+        <input align="center" type="text" id="Name" />
+        <br />
+        Aadhar :
+        <input type="text" id="owner_adhar_id" />
+        <br />
+        PAN Card Number :
+        <input type="text" id="PAN" />
+        <br />
+        Father Name :
+        <input type="text" id="Father_name" />
+        <br />
+        Mother Name :
+        <input type="text" id="Mother_name" />
+        <br />
+        <button id="submitData">Submit </button>
+
+
+    </div>
+
+
+
+</body>
+</html>
