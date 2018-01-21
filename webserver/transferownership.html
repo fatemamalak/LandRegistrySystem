@@ -15,7 +15,7 @@
                     "$class": "org.acme.land.registry.ownership_transfer",
                     "newOwner": "org.acme.land.registry.Owner#" + $('#newowner_adhar_id').val(),
                     "Owner": "org.acme.land.registry.Seller#" + $('#owner_adhar_id').val(),
-                    "property": "org.acme.land.registry.Property#	" + $('#property_id').val()
+                    "property": "org.acme.land.registry.Property#" + $('#property_id').val(),
                     "seller": $('#owner_adhar_id').val(),
                     "owner": $('#newowner_adhar_id').val(),
                     "owner_adhar_id": $('#newowner_adhar_id').val()
@@ -23,8 +23,9 @@
                 $.post("http://40.83.126.91:3000/api/org.acme.land.registry.ownership_transfer",
                     dataTransferOwnership,
                     function (data, status) {
-                        console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                        alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
                     });
+                
 
             });
         });

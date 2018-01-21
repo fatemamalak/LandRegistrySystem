@@ -40,7 +40,7 @@ function ownership_transfer(transfer){
 } 
 function get_property_details(id){
     var request = require('request')
-	return request.get('http://40.83.126.91:3000/api/org.acme.land.registry.Property?filter=%7B%20			%22Property_id%22%20%3A%20%22' + id + '%22%20%7D', function(res, err)  {
+	return request.get('http://40.83.126.91:3000/api/org.acme.land.registry.Property/'+id, function(res, err)  {
 	console.log(err.body);
  }); 
 }
