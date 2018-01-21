@@ -20,8 +20,8 @@ function add_property(p){
 */
 function ownership_transfer(transfer){
   console.log(transfer.property.Property_id);
-  	get_property_details(transfer.property.Property_id);
-  	if(1){
+  	var d=get_property_details(transfer.property.Property_id);
+  	if(d.status.equals("Owned") && transfer.seller.seller_adhar_id.equals(d.owner.owner_adhar_id)){
 		transfer.property.owner=transfer.newOwner;
   		//transfer.owner=transfer.newOwner.N;
       	transfer.property.status="doc_7_12_pending";
@@ -39,12 +39,10 @@ function ownership_transfer(transfer){
     }
 } 
 function get_property_details(id){
-    console.log("hey!")
- return getAssetRegistry("org.acme.land.registry.Property")
-  	.then(function (AssetRegistry){
-   		console.log("HELLOWORLD" + JSON.stringify(AssetRegistry.get(id)));
- 		return AssetRegistry.get(id);
- });
+    var request = require('request')
+	return request.get('http://40.83.126.91:3000/api/org.acme.land.registry.Property?filter=%7B%20			%22Property_id%22%20%3A%20%22' + id + '%22%20%7D', function(res, err)  {
+	console.log(err.body);
+ }); 
 }
 /**
 @param { org.acme.land.registry.revert_ownership} revert
@@ -53,17 +51,13 @@ function get_property_details(id){
 function revert_ownership(revert){
   console.log(revert.property.Property_id);
   	get_property_details(revert.property.Property_id);
-  	if(1){
 		revert.property.owner=revert.newOwner;
   		console.log(revert.newOwner.Name);
   		return getAssetRegistry('org.acme.land.registry.Property')
   		.then(function (assetRegistry){
       	return assetRegistry.update(revert.property);
       });
-    }
-  	else{
-    	console.log("Invalid Transaction");
-    }
+    
 } 
 /**
 @param { org.acme.land.registry.ownership_complete} complete
@@ -77,3 +71,6 @@ function ownership_complete(complete){
       	return assetRegistry.update(complete.property);
       });
 }
+
+
+
