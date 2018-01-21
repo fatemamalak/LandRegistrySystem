@@ -11,52 +11,56 @@
         $(document).ready(function () {
             $("button").click(function () {
 
-		var dataOwner = {
-				 "$class": "org.acme.land.registry.Owner",
- 				 "Name": $('#Name').val(),
- 				 "owner_adhar_id": $('#owner_adhar_id').val(),
- 				 "PAN": $('#PAN').val(),
- 				 "Father_Name": $('#Father_name').val(),
- 				 "Mother_Name": $('#Mother_name').val()
-				}
-		console.log(dataOwner);
+                var dataOwner = {
+                    "$class": "org.acme.land.registry.Owner",
+                    "Name": $('#Name').val(),
+                    "owner_adhar_id": $('#owner_adhar_id').val(),
+                    "PAN": $('#PAN').val(),
+                    "Father_Name": $('#Father_name').val(),
+                    "Mother_Name": $('#Mother_name').val()
+                }
+                console.log(dataOwner);
                 var dataProperty = {
                     "$class": "org.acme.land.registry.Property",
                     "Address": {
-				"$class": "org.acme.land.registry.Address",
-                                 "city": $('#city').val(),
-                                 "country":  $('#country').val(),
-   				 "street": $('#street').val(),
-   				 "zip": $('#zip').val()
- 				 },
- 				 "Property_id": $('#Property_id').val(),
- 				 "Property_type": $('#Property_type').val(),
-				 "Area": $('#Area').val(),
- 				 "North": $('#North').val(),
-                                 "East": $('#East').val(),
-                                 "West": $('#West').val(),
- 				 "South": $('#South').val(),
- 				 "owner": "org.acme.land.registry.Owner#"+$('#owner_adhar_id').val(),
-                                 "Mortgage": $('#Mortgage').val()
-			}				
-				               
-		$.post("http://40.83.126.91:3000/api/org.acme.land.registry.Owner",
+                        "$class": "org.acme.land.registry.Address",
+                        "city": $('#city').val(),
+                        "country": $('#country').val(),
+                        "street": $('#street').val(),
+                        "zip": $('#zip').val()
+                    },
+                    "Property_id": $('#Property_id').val(),
+                    "Property_type": $('#Property_type').val(),
+                    "Area": $('#Area').val(),
+                    "North": $('#North').val(),
+                    "East": $('#East').val(),
+                    "West": $('#West').val(),
+                    "South": $('#South').val(),
+                    "status": "Owned",
+                    "owner": "org.acme.land.registry.Owner#" + $('#owner_adhar_id').val(),
+                    "Mortgage": JSON.parse( $('#Mortgage').val() )
+                }
+
+                console.log( JSON.stringify( dataProperty));
+
+
+                $.post("http://40.83.126.91:3000/api/org.acme.land.registry.Owner",
                     dataOwner,
                     function (data, status) {
                         console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
                     });
-            
-		
-		/* $.post("http://40.83.126.91:3000/api/org.acme.land.registry.add_property",
-                    dataProperty,
-                    function (data, status) {
-                        alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
-                    });*/
+
+
+                $.post("http://40.83.126.91:3000/api/org.acme.land.registry.Property",
+                            dataProperty,
+                            function (data, status) {
+                                alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                            });
             });
-	});			
+        });
 
 
-         </script>
+    </script>
 
 
 
@@ -66,55 +70,55 @@
     <div align="center" id="ownerContainer">
         <h3> Property Details </h3>
 
-       city :
+        city :
         <input type="text" id="city" />
-        <br/>
-	
-	country :
+        <br />
+
+        country :
         <input type="text" id="country" />
-        <br/>
+        <br />
 
-	 street:
+        street:
         <input type="text" id="street" />
-        <br/>
+        <br />
 
- 	zip:
+        zip:
         <input type="text" id="zip" />
-        <br/>
-	
+        <br />
+
         Property_id :
         <input type="text" id="Property_id" />
-        <br/>
-	
-	Mortgage:
+        <br />
+
+        Mortgage:
         <input type="text" id="Mortgage" />
-        <br/>
-	
+        <br />
+
 
         Property_type :
         <input type="text" id="Property_type" />
-        <br/>
+        <br />
 
         Area :
         <input type="text" id="Area" />
-        <br/>
+        <br />
 
         North :
         <input type="text" id="North" />
-        <br/>
+        <br />
 
         South :
         <input type="text" id="South" />
-        <br/>
+        <br />
 
         East :
         <input type="text" id="East" />
-        <br/>
+        <br />
 
 
         West :
         <input type="text" id="West" />
-        <br/>
+        <br />
 
 
         <h3> Owner Details </h3>
